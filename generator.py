@@ -8,6 +8,7 @@ from diffusers import LMSDiscreteScheduler, PNDMScheduler
 # utils
 import cv2
 import numpy as np
+import random
 
 
 def main(args):
@@ -62,13 +63,15 @@ if __name__ == "__main__":
     # tokenizer
     parser.add_argument("--tokenizer", type=str, default="openai/clip-vit-large-patch14", help="tokenizer")
     # prompt
-    parser.add_argument("--prompt", type=str, default="Street-art painting of Emilia Clarke in style of Banksy, photorealism", help="prompt")
+    parser.add_argument("--prompt", type=str, default="galaxy, photorealism", help="prompt")
     # img2img params
     parser.add_argument("--init-image", type=str, default=None, help="path to initial image")
     parser.add_argument("--strength", type=float, default=0.5, help="how strong the initial image should be noised [0.0, 1.0]")
     # inpainting
     parser.add_argument("--mask", type=str, default=None, help="mask of the region to inpaint on the initial image")
     # output name
-    parser.add_argument("--output", type=str, default="output.png", help="output image name")
+    output_name = f"output_{random.randint(1,10000)}.png"
+    parser.add_argument("--output", type=str, default=output_name, help="output image name")
     args = parser.parse_args()
+    print(f"Generating '{args.prompt}'")
     main(args)
