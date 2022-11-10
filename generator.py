@@ -70,8 +70,9 @@ if __name__ == "__main__":
     # inpainting
     parser.add_argument("--mask", type=str, default=None, help="mask of the region to inpaint on the initial image")
     # output name
-    output_name = f"output_{random.randint(1,10000)}.png"
+    output_name = f"outputs/output_{random.randint(1,100000)}.png"
     parser.add_argument("--output", type=str, default=output_name, help="output image name")
     args = parser.parse_args()
-    print(f"Generating '{args.prompt}'")
+    print(f"Generating '{args.prompt}' \nOutputting to {output_name}")
+    #print(f"Generating '{args.prompt}' \nOutputting to {args.prompt}")
     main(args)
