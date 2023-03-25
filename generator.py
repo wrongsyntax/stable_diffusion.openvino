@@ -14,6 +14,7 @@ import random
 def main(args):
     if args.seed is not None:
         np.random.seed(args.seed)
+        print(f"\033[93m\tSeed = {args.seed}\033[0m")
     if args.init_image is None:
         scheduler = LMSDiscreteScheduler(
             beta_start=args.beta_start,
@@ -70,9 +71,12 @@ if __name__ == "__main__":
     # inpainting
     parser.add_argument("--mask", type=str, default=None, help="mask of the region to inpaint on the initial image")
     # output name
-    output_name = f"outputs/output_{random.randint(1,100000)}.png"
+    rand_num = random.randint(1,9999999)
+    output_name = f"outputs/output_{rand_num}.png"
     parser.add_argument("--output", type=str, default=output_name, help="output image name")
     args = parser.parse_args()
-    print(f"Generating '{args.prompt}' \nOutputting to {output_name}")
-    #print(f"Generating '{args.prompt}' \nOutputting to {args.prompt}")
+    print(f"\033[36m\tPROMPT = '{args.prompt}' \n\033[32m\tOutputting to {output_name}\033[0m")
+    if args.seed is None:
+        args.seed = rand_num
+    #print(f"PROMPT = '{args.prompt}' \nOutputting to {args.prompt}")
     main(args)
